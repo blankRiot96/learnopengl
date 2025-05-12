@@ -25,12 +25,15 @@ int main() {
     glfwSetFramebufferSizeCallback(window, on_window_resize);
 
     while (!glfwWindowShouldClose(window)) {
+        glfwPollEvents();
         if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
             glfwSetWindowShouldClose(window, true);
         }
 
+        glClearColor(0.2, 0.2, 0.4, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT);
+
         glfwSwapBuffers(window);
-        glfwPollEvents();
     }
 
     glfwTerminate();
