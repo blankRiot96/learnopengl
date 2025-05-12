@@ -1,0 +1,18 @@
+# Ignore build output and intermediate files
+/build/
+/bin/
+/obj/
+*.o
+*.a
+*.out
+
+# Ignore generated files
+game
+*.exe
+*.log
+*.tmp
+
+# Ignore personal configuration files and IDE settings
+.vscode/
+.idea/
+
