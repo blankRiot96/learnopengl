@@ -1,0 +1,65 @@
+
+Okay so first of all there are some things: 
+    - VAO (Vertex Array Object) 
+    - VBO (Vertex Buffer Object)
+    - Shaders
+    - Programs
+
+
+VBOs basically store the vertex array efficiently on the GPU
+```
+    glGenBuffers(1, &VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+    float vertices[] = {
+        0, 0.5, 0,
+        -0.5, -0.5, 0,
+        0.5, -0.5, 0
+    };
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+```
+
+
+VAOs tell OpenGL how to organize that array data. Like the space between vertices, the "stride" etc. 
+
+```
+    unsigned int VAO, VBO;
+
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
+```
+
+and then in render loop:
+```
+        glUseProgram(shaderProgram);
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+```
+
+Shaders in this case are vertex and fragment shaders. The vertex shader constructs the points, after which the geometry shader connects them (we use the default geometry shader),
+then the shape builder kinda solidifies the shape? The rasterization stage finds all the pixel coordinates on the screen to fill up and then the ones
+outside the screen are clipped. Then those pixel coordinates are passed to the fragment shader, the fragment shader defines the color for each pixel.
+Then the blending and alpha stuff is done
+
+The vertex shader for example:
+```
+    unsigned int vertexShader;
+    vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertexShader, 1, &vertextShaderSource, NULL);
+    glCompileShader(vertexShader);
+``
+
+
+The "Programs" are basically what run the shaders? so they are a collection of shaders?
+```
+    unsigned int shaderProgram;
+    shaderProgram = glCreateProgram();
+    glAttachShader(shaderProgram, vertexShader);
+    glAttachShader(shaderProgram, fragShader);
+    glLinkProgram(shaderProgram);
+```
+
+In render loop:
+```
+        glUseProgram(shaderProgram);
+```
