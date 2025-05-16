@@ -2,6 +2,7 @@
 /build/
 /bin/
 /obj/
+.cache/
 *.o
 *.a
 *.out
@@ -11,6 +12,7 @@ game
 *.exe
 *.log
 *.tmp
+compile_commands.json
 
 # Ignore personal configuration files and IDE settings
 .vscode/
