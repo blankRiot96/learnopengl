@@ -1,10 +1,9 @@
+#include "test.hpp"
+#include "shader.hpp"
+
 #include <cmath>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <test.h>
-#include <shader.h>
-
-
 #include <iostream>
 
 const int SCREEN_WIDTH = 800;
